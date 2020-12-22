@@ -70,7 +70,7 @@ function plotData(id) {
         //console.log(wfreq);
 
         // Create guage plot
-        var guageData = [
+        var gaugeData = [
             {
                 domain: {x: [0, 1], y: [0, 1] },
                 value: parseFloat(wfreq),
@@ -95,7 +95,7 @@ function plotData(id) {
             margin: {t: 50, b: 50, l: 50, r: 50}
         };
         // Initiate plot
-        Plotly.newPlot("guage", guageData, layout3);
+        Plotly.newPlot("gauge", gaugeData, layout3);
     });
 
 };
