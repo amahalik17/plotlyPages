@@ -137,8 +137,8 @@ function init() {
             dropDownMenu.append("option").text(name).property("value");
         });
         // Call functions to display data amd plots
-        plotData(data.names);
-        getData(data.names);
+        plotData(data.names[0]);
+        getData(data.names[0]);
     });
 };
 
