@@ -5,9 +5,6 @@ function plotData(id) {
     d3.json('Data/samples.json').then((data) => {
         console.log(data);
 
-        var wfreq = data.metadata.map(details => details.wfreq);
-        //console.log(wfreq);
-
         // filter samples by id, and convert to string
         var samples = data.samples.filter(details => details.id.toString() === id)[0];
         //console.log(samples);
@@ -69,6 +66,9 @@ function plotData(id) {
         // Initiate the bubble plot
         Plotly.newPlot("bubble", data2, layout2);
 
+        var wfreq = data.metadata.map(details => details.wfreq);
+        //console.log(wfreq);
+
         // Create guage plot
         var guageData = [
             {
@@ -119,7 +119,7 @@ function getData(id) {
     });
 };
 
-// Create a function that uses the last two function for changed ids
+// Create a function for changed ids
 function optionChanged(id) {
     plotData(id);
     getData(id);
