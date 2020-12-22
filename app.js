@@ -120,7 +120,7 @@ function getData(id) {
 };
 
 // Create a function that uses the last two function for changed ids
-function idChanged(id) {
+function optionChanged(id) {
     plotData(id);
     getData(id);
 };
