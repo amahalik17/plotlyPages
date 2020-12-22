@@ -50,7 +50,7 @@ function plotData(id) {
             }
         };
 
-        // Create the horizontal bar plot
+        // Initiate the horizontal bar plot
         Plotly.newPlot("bar", data, layout);
 
         // Create traces for bubble plot
@@ -77,18 +77,30 @@ function plotData(id) {
         Plotly.newPlot("bubble", data2, layout2);
 
         // Create guage plot
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
+        var guageData = [
+            {
+                domain: {x: [0, 1], y: [0, 1] },
+                value: parseFloat(wfreq),
+                title: {text: 'Weekly Washing Frequency'},
+                type: 'indicator',
+                mode: 'guage+number',
+                guage: {axis: {range: [null, 9] },
+                    steps: [
+                    { range: [0, 2], color: "yellow" },
+                    { range: [2, 4], color: "cyan" },
+                    { range: [4, 6], color: "teal" },
+                    { range: [6, 8], color: "lime" },
+                    { range: [8, 9], color: "green" },
+                    ]}
+            }];
+        
+        var layout3 = {
+            width: 750,
+            height: 600,
+            margin: {t: 20, b: 20, l: 40, r: 40}
+        };
 
+        Plotly.newPlot("guage", guageData, layout3);
 
     });
 
@@ -104,17 +116,18 @@ function getData(id) {
         var results = metadata.filter(meta => meta.id.toString() === id)[0];
 
         var demoData = d3.select("#sample-metadata");
+        // clear the panel each time
         demoData.html("");
 
         Object.entries(results).forEach((key) => {
-            demoData.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");  
+            demoData.append("h5").text(key[0].toUpperCase() + ": " + key[1]);  
         });
     });
 };
 
 // Create a function that uses the last two function for changed ids
 function idChanged(id) {
-    getPlot(id);
+    plotData(id);
     getData(id);
 };
 
