@@ -6,23 +6,21 @@ function plotData(id) {
         console.log(data);
 
         var wfreq = data.metadata.map(details => details.wfreq);
-        console.log(wfreq);
+        //console.log(wfreq);
 
         // filter samples by id, and convert to string
         var samples = data.samples.filter(details => details.id.toString() === id)[0];
-        console.log(samples);
+        //console.log(samples);
 
         // Get the top 10 OTUs
         var sampleValues = samples.sample_values.slice(0, 10).reverse();
         var topTenOTU = (samples.otu_ids.slice(0, 10)).reverse();
-
         var OTU_ids = topTenOTU.map(details => "OTU" + details);
-
         var labels = samples.otu_labels.slice(0, 10);
 
-        console.log(`OTU Ids: ${OTU_ids}`);
-        console.log(`Sample Values: ${sampleValues}`);
-        console.log(`Top ten OTU IDs: ${topTenOTU}`);
+        //console.log(`OTU Ids: ${OTU_ids}`);
+        //console.log(`Sample Values: ${sampleValues}`);
+        //console.log(`Top ten OTU IDs: ${topTenOTU}`);
 
         // Create traces for bar plot
         var trace1 = {
@@ -32,10 +30,8 @@ function plotData(id) {
             type: "bar",
             orientation: "h"
         };
-
         // Create data variable for plot
         var data = [trace1];
-
         // Create layout variable for plot
         var layout = {
             title: "Top Ten OTUs",
@@ -49,7 +45,6 @@ function plotData(id) {
                 b: 100
             }
         };
-
         // Initiate the horizontal bar plot
         Plotly.newPlot("bar", data, layout);
 
@@ -57,23 +52,21 @@ function plotData(id) {
         var trace2 = {
             x: samples.otu_ids,
             y: samples.sample_values,
+            text: samples.otu_labels,
             mode: "markers",
             marker: {
                 size: samples.sample_values,
                 color: samples.otu_ids
-            },
-            text: samples.otu_labels
+            }
         };
-
         // Create the layout variable
         var layout2 = {
             xaxis: {title: "OTU ID"},
             height: 750,
             width: 1250
         };
-
         var data2 = [trace2];
-
+        // Initiate the bubble plot
         Plotly.newPlot("bubble", data2, layout2);
 
         // Create guage plot
@@ -85,23 +78,24 @@ function plotData(id) {
                 type: 'indicator',
                 mode: 'guage+number',
                 guage: {axis: {range: [null, 9] },
+                bar: {color: 'green'},
                     steps: [
-                    { range: [0, 2], color: "yellow" },
-                    { range: [2, 4], color: "cyan" },
-                    { range: [4, 6], color: "teal" },
-                    { range: [6, 8], color: "lime" },
-                    { range: [8, 9], color: "green" },
+                    { range: [0, 2], color: "purple" },
+                    { range: [2, 4], color: "red" },
+                    { range: [4, 6], color: "blue" },
+                    { range: [6, 8], color: "teal" },
+                    { range: [8, 9], color: "green" }
                     ]}
-            }];
+                }
+            ];
         
         var layout3 = {
             width: 750,
             height: 600,
-            margin: {t: 20, b: 20, l: 40, r: 40}
+            margin: {t: 50, b: 50, l: 50, r: 50}
         };
-
+        // Initiate plot
         Plotly.newPlot("guage", guageData, layout3);
-
     });
 
 };
@@ -110,7 +104,7 @@ function plotData(id) {
 function getData(id) {
     d3.json('Data/samples.json').then((data) => {
 
-        var metadata = data.metadate;
+        var metadata = data.metadata;
         console.log(metadata);
 
         var results = metadata.filter(meta => meta.id.toString() === id)[0];
@@ -131,12 +125,13 @@ function idChanged(id) {
     getData(id);
 };
 
+// initial data rendering function
 function init() {
     var dropDownMenu = d3.select("#selDataset");
 
     // Read in the data
     d3.json("Data/samples.json").then((data) => {
-        console.log(data);
+        //console.log(data);
 
         data.names.forEach(function(name) {
             dropDownMenu.append("option").text(name).property("value");
