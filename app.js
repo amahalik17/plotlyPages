@@ -69,7 +69,7 @@ function plotData(id) {
         var wfreq = data.metadata.map(details => details.wfreq);
         //console.log(wfreq);
 
-        // Create guage plot
+        // Create gauge plot
         var gaugeData = [
             {
                 domain: {x: [0, 1], y: [0, 1] },
@@ -77,8 +77,8 @@ function plotData(id) {
                 title: {text: 'Weekly Washing Frequency'},
                 type: 'indicator',
                 mode: 'guage+number',
-                guage: {axis: {range: [null, 9] },
-                bar: {color: 'green'},
+                gauge: {axis: {range: [null, 9] },
+                //bar: {color: 'green'},
                     steps: [
                     { range: [0, 2], color: "purple" },
                     { range: [2, 4], color: "red" },
