@@ -90,9 +90,9 @@ function plotData(id) {
             ];
         
         var layout3 = {
-            width: 750,
-            height: 600,
-            margin: {t: 50, b: 50, l: 50, r: 50}
+            width: 500,
+            height: 400,
+            margin: {t: 10, b: 10, l: 20, r: 20}
         };
         // Initiate plot
         Plotly.newPlot("gauge", gaugeData, layout3);
@@ -105,7 +105,7 @@ function getData(id) {
     d3.json('Data/samples.json').then((data) => {
 
         var metadata = data.metadata;
-        console.log(metadata);
+        //console.log(metadata);
 
         var results = metadata.filter(meta => meta.id.toString() === id)[0];
 
