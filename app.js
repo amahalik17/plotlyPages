@@ -66,6 +66,7 @@ function plotData(id) {
         // Initiate the bubble plot
         Plotly.newPlot("bubble", data2, layout2);
 
+        // Find the washing frew from metadata
         var wfreq = data.metadata.map(details => details.wfreq);
         //console.log(wfreq);
 
@@ -73,12 +74,13 @@ function plotData(id) {
         var gaugeData = [
             {
                 domain: {x: [0, 1], y: [0, 1] },
+                // convert the wfreq string to a float
                 value: parseFloat(wfreq),
                 title: {text: 'Weekly Washing Frequency'},
-                type: 'indicator',
-                mode: 'guage+number',
-                gauge: {axis: {range: [null, 9] },
-                //bar: {color: 'green'},
+                type: "indicator",
+                mode: "gauge+number",
+                gauge: {
+                    axis: {range: [null, 9] },
                     steps: [
                     { range: [0, 2], color: "purple" },
                     { range: [2, 4], color: "red" },
@@ -92,7 +94,7 @@ function plotData(id) {
         var layout3 = {
             width: 500,
             height: 400,
-            margin: {t: 10, b: 10, l: 20, r: 20}
+            margin: {t: 10, b: 20, l: 80, r: 80}
         };
         // Initiate plot
         Plotly.newPlot("gauge", gaugeData, layout3);
