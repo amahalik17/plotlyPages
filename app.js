@@ -68,12 +68,15 @@ function plotData(id) {
 
         var wfreq = data.metadata.map(details => details.wfreq);
         //console.log(wfreq);
+        var cleanFreq = wfreq.filter((details) => {
+            return details != null;
+        });
 
         // Create gauge plot
         var gaugeData = [
             {
                 domain: {x: [0, 1], y: [0, 1] },
-                value: parseFloat(wfreq),
+                value: parseFloat(cleanFreq),
                 title: {text: 'Weekly Washing Frequency'},
                 type: 'indicator',
                 mode: 'guage+number',
