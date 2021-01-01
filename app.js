@@ -68,9 +68,6 @@ function plotData(id) {
 
         var wfreq = data.metadata.map(details => details.wfreq);
         //console.log(wfreq);
-        var cleanFreq = wfreq.filter((details) => {
-            return details != null;
-        });
 
         // Create gauge plot
         var gaugeData = [
