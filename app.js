@@ -73,7 +73,7 @@ function plotData(id) {
         var gaugeData = [
             {
                 domain: {x: [0, 1], y: [0, 1] },
-                value: parseFloat(cleanFreq),
+                value: parseFloat(wfreq),
                 title: {text: 'Weekly Washing Frequency'},
                 type: 'indicator',
                 mode: 'guage+number',
