@@ -28,7 +28,7 @@ function plotData(id) {
             orientation: "h"
         };
         // Create data variable for plot
-        var data = [trace1];
+        var data1 = [trace1];
         // Create layout variable for plot
         var layout = {
             title: "Top Ten OTUs",
@@ -43,7 +43,7 @@ function plotData(id) {
             }
         };
         // Initiate the horizontal bar plot
-        Plotly.newPlot("bar", data, layout);
+        Plotly.newPlot("bar", data1, layout);
 
         // Create traces for bubble plot
         var trace2 = {
@@ -67,15 +67,15 @@ function plotData(id) {
         Plotly.newPlot("bubble", data2, layout2);
 
         // Find the washing frew from metadata
-        var wfreq = data.metadata.map(details => details.wfreq);
+        var wfreq = data.metadata.wfreq
         //console.log(wfreq);
 
         // Create gauge plot
         var gaugeData = [
             {
                 domain: {x: [0, 1], y: [0, 1] },
-                // convert the wfreq string to a float
-                value: parseFloat(wfreq),
+                // convert the wfreq to float
+                value: wfreq,
                 title: {text: 'Weekly Washing Frequency'},
                 type: "indicator",
                 mode: "gauge+number",
